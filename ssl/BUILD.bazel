@@ -1,0 +1,20 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary")
+
+cc_binary(
+    name = "ssl_client",
+    srcs = ["client.cpp"],
+    data = [
+        "ca.pem",
+    ],
+    deps = ["//:asio"],
+)
+
+cc_binary(
+    name = "ssl_server",
+    srcs = ["server.cpp"],
+    data = [
+        "dh2048.pem",
+        "server.pem",
+    ],
+    deps = ["//:asio"],
+)

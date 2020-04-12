@@ -1,0 +1,34 @@
+load("@rules_cc//cc:defs.bzl", "cc_library", "cc_test")
+
+cc_library(
+    name = "asio",
+    srcs = glob(["asio/asio/include/**/*.ipp"]),
+    hdrs = glob(["asio/asio/include/**/*.hpp"]),
+    includes = ["asio/asio/include"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@openssl",
+    ],
+)
+
+cc_library(
+    name = "asio_without_openssl",
+    srcs = glob(
+        ["asio/asio/include/**/*.ipp"],
+        ["asio/asio/include/asio/ssl/**/*.ipp"],  # exclude
+    ),
+    hdrs = glob(
+        ["asio/asio/include/**/*.hpp"],
+        ["asio/asio/include/asio/ssl/**/*.hpp"],  # exclude
+    ),
+    includes = ["asio/asio/include"],
+    visibility = ["//visibility:public"],
+)
+
+cc_test(
+    name = "asio_timer_test",
+    srcs = ["asio_timer_test.cpp"],
+    deps = [
+        ":asio_without_openssl",
+    ],
+)
