@@ -7,6 +7,7 @@ cc_binary(
         "ca.pem",
     ],
     deps = ["//:asio"],
+    linkopts = ["-lpthread", "-ldl"],
 )
 
 cc_binary(
@@ -17,4 +18,5 @@ cc_binary(
         "server.pem",
     ],
     deps = ["//:asio"],
+    linkopts = ["-lpthread", "-ldl"],
 )
