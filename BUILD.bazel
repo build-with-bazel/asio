@@ -29,6 +29,7 @@ cc_test(
     name = "asio_timer_test",
     srcs = ["asio_timer_test.cpp"],
     deps = [
-        ":asio_without_openssl",
+        ":asio",
     ],
+    linkopts = ["-lpthread", "-ldl"],
 )
